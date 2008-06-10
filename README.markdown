@@ -39,7 +39,7 @@ Methods and Options
 Examples
 --------
 
-**Example:**
+**Create a delete button:**
 
     action_button 'delete-comment', 'Delete this Comment', comment_path(@post, comment), {:method => :delete, :number => comment.id}
     
@@ -54,16 +54,15 @@ Examples
        </p>
     </form>
     
+  
+**Embed an image and use custom classes and id for easier styling:**
 
-**Example:**
+    action_button 'delete-comment', image_tag('icons/delete.png', :alt => 'Add a Comment'),
+                                    new_comment_path(@post),
+                                    { :id => "commentDel", :class => 'delComment', 
+                                      :form_class => 'delComment', :form_id => "delCommentForm" }
 
-    action_button 'delete-comment', image_tag('icons/delete.png', :alt => 'Delete this Comment'),
-                                    comment_path(@post, comment),
-                                    { :method => :delete, :id => "commentDel#{comment.id}",
-                                      :class => 'delComment', :form_class => 'delComment'
-                                      :form_id => "delCommentForm#{comment.id}" }
-
-**Produces**    
+**Produces:**    
 
     <form action="/posts/5/comments/12" class="delComment" id="delCommentForm12" method="post">
        <div style="margin:0;padding:0">
@@ -77,5 +76,8 @@ Examples
     </form>
 
 
+  
+
+### License
 
 Copyright (c) 2008 Brian Landau of Viget Labs, released under the MIT license
