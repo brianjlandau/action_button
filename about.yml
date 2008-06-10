@@ -1,0 +1,7 @@
+author: Brian Landau
+company: Viget Labs
+version: 1.0
+description: Helper to create a non-AJAX form containing a single button element.
+url: http://github.com/vigetlabs/action_button/
+install: git://github.com/vigetlabs/action_button.git
+license: MIT

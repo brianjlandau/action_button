@@ -36,11 +36,16 @@ class ActionButtonTest < ActiveSupport::TestCase
     end
     
     should 'have a form with url, and auto id and name' do
-      assert_tag_in @button, :form, :attributes => {:id => 'action-form', :class => 'action-form', :action => 'http://www.example.com/action.do'}
+      assert_tag_in @button, :form, :attributes => {:id => 'action-form',
+                                                    :class => 'action-form',
+                                                    :action => 'http://www.example.com/action.do'}
     end
     
     should 'have a button with id, name, class, type, and content' do
-      assert_tag_in @button, :button, :content => 'Do this', :attributes => {:id => 'action', :name => 'action', :class => 'action', :type => 'submit'}
+      assert_tag_in @button, :button, :content => 'Do this', :attributes => { :id => 'action', 
+                                                                              :name => 'action',
+                                                                              :class => 'action',
+                                                                              :type => 'submit' }
     end
     
     teardown do
@@ -59,7 +64,10 @@ class ActionButtonTest < ActiveSupport::TestCase
     end
     
     should 'have a button with id, name, class, type, and content' do
-      assert_tag_in @button, :button, :content => 'Do this', :attributes => {:id => 'action5', :name => 'action5', :class => 'action', :type => 'submit'}
+      assert_tag_in @button, :button, :content => 'Do this', :attributes => { :id => 'action5',
+                                                                              :name => 'action5',
+                                                                              :class => 'action',
+                                                                              :type => 'submit' }
     end
     
     teardown do
@@ -69,15 +77,22 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'an action button with html options' do
     setup do
-      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do', :id => 'button5', :class => 'do'
+      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do',
+                              :id => 'button5', :class => 'do', :method => 'delete'
+      puts @button
     end
     
     should 'have a form with url, and auto id and name' do
-      assert_tag_in @button, :form, :attributes => {:id => 'button5-form', :class => 'do-form', :action => 'http://www.example.com/action.do'}
+      assert_tag_in @button, :form, :attributes => { :id => 'button5-form',
+                                                     :class => 'do-form',
+                                                     :action => 'http://www.example.com/action.do' }
     end
     
     should 'have a button with id, name, class, type, and content' do
-      assert_tag_in @button, :button, :content => 'Do this', :attributes => {:id => 'button5', :name => 'button5', :class => 'do', :type => 'submit'}
+      assert_tag_in @button, :button, :content => 'Do this', :attributes => { :id => 'button5',
+                                                                              :name => 'button5',
+                                                                              :class => 'do',
+                                                                              :type => 'submit'}
     end
     
     teardown do
@@ -87,15 +102,21 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'an action button with form html options' do
     setup do
-      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do', :form_id => 'doThisForm', :form_class => 'doForm'
+      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do',
+                              :form_id => 'doThisForm', :form_class => 'doForm'
     end
     
     should 'have a form with url, and auto id and name' do
-      assert_tag_in @button, :form, :attributes => {:id => 'doThisForm', :class => 'doForm', :action => 'http://www.example.com/action.do'}
+      assert_tag_in @button, :form, :attributes => { :id => 'doThisForm',
+                                                     :class => 'doForm',
+                                                     :action => 'http://www.example.com/action.do' }
     end
     
     should 'have a button with id, name, class, type, and content' do
-      assert_tag_in @button, :button, :content => 'Do this', :attributes => {:id => 'action', :name => 'action', :class => 'action', :type => 'submit'}
+      assert_tag_in @button, :button, :content => 'Do this', :attributes => { :id => 'action',
+                                                                              :name => 'action',
+                                                                              :class => 'action',
+                                                                              :type => 'submit' }
     end
     
     teardown do
@@ -105,15 +126,23 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'an action button with special optoins' do
     setup do
-      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do', :wrapper_tag => :div, :number => 5
+      @button = action_button 'action', 'Do this', 'http://www.example.com/action.do',
+                              :wrapper_tag => :div, :number => 5
     end
     
     should 'have a form with url, and auto id and name' do
-      assert_tag_in @button, :form, :attributes => {:id => 'action5-form', :class => 'action-form', :action => 'http://www.example.com/action.do'}
+      assert_tag_in @button, :form, :attributes => { :id => 'action5-form',
+                                                     :class => 'action-form',
+                                                     :action => 'http://www.example.com/action.do' }
     end
     
     should 'have a button with id, name, class, type, and content' do
-      assert_tag_in @button, :div, :child => {:tag => 'button', :content => 'Do this', :attributes => {:id => 'action5', :name => 'action5', :class => 'action', :type => 'submit'}}
+      assert_tag_in @button, :div, :child => { :tag => 'button',
+                                               :content => 'Do this',
+                                               :attributes => { :id => 'action5',
+                                                                :name => 'action5',
+                                                                :class => 'action',
+                                                                :type => 'submit' } }
     end
     
     teardown do
@@ -153,13 +182,8 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'ujs_remote_form script with options' do
     setup do
-      @script = ujs_remote_form 'form.action', :url => '/blog/5/action?test=1&foo=bar',
-                                               :update => { :success => 'items-div-id',
+      @script = ujs_remote_form 'form.action', :update => { :success => 'items-div-id',
                                                             :failure => 'error-flash'}
-    end
-    
-    should 'have an unescaped url option' do
-      expect(@script).to.match /url:'\/blog\/5\/action\?test\=1&foo\=bar'/
     end
     
     should 'have an option for both update options' do

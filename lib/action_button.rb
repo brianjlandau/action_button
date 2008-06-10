@@ -83,16 +83,6 @@ JS
           extra_options << "confirm:'#{confirm}'"
         end
 
-        if options[:url]
-          case options[:url]
-          when String
-            extra_options << "url:'#{options[:url]}'"
-          else
-            url = url_for(options[:url].merge(:escape => false))
-            extra_options << "url:'#{options[:url]}'"
-          end
-        end
-
         if options[:update] && options[:update].is_a?(Hash)
           update  = []
           update << "success:'#{options[:update][:success]}'" if options[:update][:success]
