@@ -79,7 +79,6 @@ class ActionButtonTest < ActiveSupport::TestCase
     setup do
       @button = action_button 'action', 'Do this', 'http://www.example.com/action.do',
                               :id => 'button5', :class => 'do', :method => 'delete'
-      puts @button
     end
     
     should 'have a form with url, and auto id and name' do
