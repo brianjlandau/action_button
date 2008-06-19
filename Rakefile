@@ -2,8 +2,6 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
-require 'rubygems'
-require 'spec/rake/spectask'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -22,9 +20,4 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README', 'CHANGES', 'MIT-LICENSE')
   rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-desc "Run all specs"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_opts = ['--options', 'spec/spec.opts']
 end
