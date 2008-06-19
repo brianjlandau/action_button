@@ -1,7 +1,7 @@
 # ActionButton
 module ActionButton
 
-  module Helper
+  module Helpers
 
     ##
     # This will add a button that will execute the given action, this is done by
@@ -75,7 +75,7 @@ JS
 
     private
 
-      def custom_remote_options(options = {}) # :nodoc: all
+      def custom_remote_options(options = {}) # :nodoc:
         extra_options = []
 
         if options[:confirm]

@@ -14,8 +14,8 @@ require 'html/document'
 require 'active_support/test_case'
 require File.join(PLUGIN_ROOT, 'lib/action_button.rb')
 
-ActionView::Base.send :include, ActionButton::Helper
-ActionView::Helpers::FormTagHelper.send :include, ActionButton::Helper
+ActionView::Base.send :include, ActionButton::Helpers
+ActionView::Helpers::FormTagHelper.send :include, ActionButton::Helpers
 
 class ActiveSupport::TestCase
   include ActionView::Helpers::FormTagHelper
