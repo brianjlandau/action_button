@@ -3,7 +3,7 @@ module ActionButton
 
   module Helpers
 
-    ##
+    # 
     # This will add a button that will execute the given action, this is done by
     # wrapping the button in a form element. This allows destructive actions to be
     # packaged in a highly styleable element and still be "safe" by not using GET's.
@@ -23,13 +23,13 @@ module ActionButton
     #   * a wrapper is needed so XHTML 1.0 Strict will validate
     # * <tt>:form_class</tt> - set's the class attribute for the form tag.
     # * <tt>:form_id</tt> - set's the id attribute for the form tag.
+    # * <tt>:wrapper_class</tt> - set's the class for the wrapper tag. default: <tt>nil</tt>
     # 
     # ==== Example
     #   <%= action_button 'delete_order', "Delete this Order", {:action => :delete, :id => order}, {:method => :delete} %> 
     #
     def action_button(name, content, url_for_options = {}, options = {}, *parameters_for_url)
-      defaults = {:class => name}
-      options = defaults.merge(options)
+      options.reverse_merge!({:class => name})
       wrapper_tag = options.delete(:wrapper_tag) || :p
       
       if options[:id].blank?
@@ -43,14 +43,13 @@ module ActionButton
       output = form_tag(url_for_options, options.merge(:class => "#{form_class}", :id => "#{form_id}"), *parameters_for_url)
       options.delete(:method)
       
-      output << "\n"
-      output << content_tag(wrapper_tag, button_tag(id, content, 'submit', options) )
-      output << "\n</form>"
+      output << "\n<#{wrapper_tag}#{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}"
+      output << button_tag(id, content, 'submit', options)
+      output << "</#{wrapper_tag}>\n</form>"
       
       return output
     end
     
-    ##
     # Creates a button tag with the content passed to the content parameter inside.
     # It also sets the <tt>name</tt> attribute, and the <tt>type</tt> attribute on the tag
     # bassed on the parameters provided.
@@ -59,11 +58,10 @@ module ActionButton
       content_tag(:button, content, html_options.merge(:type => type, :name => name, :id => name))
     end
     
-    ##
     # Creates javascript to create a remote form event observer with the lowpro library for all
     # elements that match the CSS selector specified.
     #
-    def ujs_remote_form(selector, options = {})
+    def lowpro_remote_form(selector, options = {})
       js_options = custom_remote_options(options)
       
       <<JS
@@ -71,6 +69,13 @@ module ActionButton
     '#{selector}': Remote.Form(#{js_options})
   });
 JS
+    end
+    
+    # Creates javascript to create a remote form event observer with the jQuery lowpro library
+    # for all elements that match the CSS selector specified.
+    #
+    def jquery_lowpro_remote_form(selector, options = {})
+      "$('#{selector}').attach(Remote.Form, #{options_for_javascript(options)});"
     end
 
     private

@@ -10,7 +10,7 @@ require 'active_support'
 require 'action_controller'
 require 'action_view'
 require 'rexml/document'
-require 'html/document'
+require 'action_controller/vendor/html-scanner'
 require 'active_support/test_case'
 require File.join(PLUGIN_ROOT, 'lib/action_button.rb')
 

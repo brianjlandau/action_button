@@ -27,7 +27,8 @@ Methods and Options
                          default is `:p`
       * `:form_class` - set's the class attribute for the form tag
       * `:form_id` - set's the id attribute for the form tag
-* `ujs_remote_form (selector, options)`
+      * `:wrapper_class` - set's the class for the wrapper tag. default: `nil`
+* `lowpro_remote_form (selector, options)`
    * `selector`: the CSS selector used to specify which element(s) to apply this observer to.
    * `options`:
       * all the standard `options_for_ajax` options used in all the `remote` Prototype helpers

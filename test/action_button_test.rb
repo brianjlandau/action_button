@@ -152,8 +152,8 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'ujs_remote_form script with options' do
     setup do
-      @script = ujs_remote_form 'form.action', :confirm => 'Do you want to do this?',
-                                               :update => 'some-id', :with => "'size=' + $F('itemSize')"
+      @script = lowpro_remote_form 'form.action', :confirm => 'Do you want to do this?',
+                                                  :update => 'some-id', :with => "'size=' + $F('itemSize')"
     end
     
     should 'have lowpro event listenter and slector' do
@@ -181,8 +181,8 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'ujs_remote_form script with options' do
     setup do
-      @script = ujs_remote_form 'form.action', :update => { :success => 'items-div-id',
-                                                            :failure => 'error-flash'}
+      @script = lowpro_remote_form 'form.action', :update => { :success => 'items-div-id',
+                                                               :failure => 'error-flash'}
     end
     
     should 'have an option for both update options' do
