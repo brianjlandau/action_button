@@ -75,7 +75,7 @@ JS
     # for all elements that match the CSS selector specified.
     #
     def jquery_lowpro_remote_form(selector, options = {})
-      "$('#{selector}').attach(Remote.Form, #{options_for_javascript(options)});"
+      "$('#{selector}').attach(Remote.Form, #{options_for_javascript(options)});\n"
     end
 
     private
