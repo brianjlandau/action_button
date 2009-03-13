@@ -43,7 +43,7 @@ module ActionButton
       output = form_tag(url_for_options, options.merge(:class => "#{form_class}", :id => "#{form_id}"), *parameters_for_url)
       options.delete(:method)
       
-      output << "\n<#{wrapper_tag}#{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}"
+      output << "\n<#{wrapper_tag}>#{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}"
       output << button_tag(id, content, 'submit', options)
       output << "</#{wrapper_tag}>\n</form>"
       
