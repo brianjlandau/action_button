@@ -83,14 +83,14 @@ class ActionButtonTest < ActiveSupport::TestCase
     
     should 'have a form with url, and auto id and name' do
       assert_tag_in @button, :form, :attributes => { :id => 'button5-form',
-                                                     :class => 'do-form',
+                                                     :class => 'action-form',
                                                      :action => 'http://www.example.com/action.do' }
     end
     
     should 'have a button with id, name, class, type, and content' do
       assert_tag_in @button, :button, :content => 'Do this', :attributes => { :id => 'button5',
                                                                               :name => 'button5',
-                                                                              :class => 'do',
+                                                                              :class => 'do action',
                                                                               :type => 'submit'}
     end
     
@@ -123,7 +123,7 @@ class ActionButtonTest < ActiveSupport::TestCase
     end
   end
   
-  context 'an action button with special optoins' do
+  context 'an action button with special options' do
     setup do
       @button = action_button 'action', 'Do this', 'http://www.example.com/action.do',
                               :wrapper_tag => :div, :number => 5

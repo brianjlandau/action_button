@@ -29,23 +29,34 @@ module ActionButton
     #   <%= action_button 'delete_order', "Delete this Order", {:action => :delete, :id => order}, {:method => :delete} %> 
     #
     def action_button(name, content, url_for_options = {}, options = {}, *parameters_for_url)
-      options.reverse_merge!({:class => name})
-      wrapper_tag = options.delete(:wrapper_tag) || :p
-      
-      if options[:id].blank?
-        id = (url_for_options[:id] || options[:number]) ? name + (url_for_options[:id] || options.delete(:number)).to_s : name
+      if options[:class].present?
+        options[:class] << " #{name}"
       else
-        id = options[:id]
+        options[:class] = name
       end
-      form_class = options.delete(:form_class) { |o| "#{options[:class]}-form" }
+      wrapper_tag = options.delete(:wrapper_tag) || :p
+
+      if options[:id].present?
+        id = options[:id]
+      else
+        if url_for_options.kind_of?(Hash) && url_for_options[:id].present?
+          id = name + (url_for_options[:id]).to_s
+        elsif options[:number].present?
+          id = name + options.delete(:number).to_s
+        else
+          id = name
+        end
+      end
+      
+      form_class = options.delete(:form_class) { |o| "#{name}-form" }
       form_id = options.delete(:form_id) { |o| "#{id}-form" }
       
       output = form_tag(url_for_options, options.merge(:class => "#{form_class}", :id => "#{form_id}"), *parameters_for_url)
       options.delete(:method)
       
-      output << "\n<#{wrapper_tag}>#{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}"
-      output << button_tag(id, content, 'submit', options)
-      output << "</#{wrapper_tag}>\n</form>"
+      output << "\n<#{wrapper_tag} #{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}>".html_safe
+      output << button_tag(id, content, 'submit', options).html_safe
+      output << "</#{wrapper_tag}>\n</form>".html_safe
       
       return output
     end
