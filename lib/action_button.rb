@@ -54,11 +54,11 @@ module ActionButton
       output = form_tag(url_for_options, options.merge(:class => "#{form_class}", :id => "#{form_id}"), *parameters_for_url)
       options.delete(:method)
       
-      output << "\n<#{wrapper_tag} #{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}>".html_safe
-      output << button_tag(id, content, 'submit', options).html_safe
-      output << "</#{wrapper_tag}>\n</form>".html_safe
+      output << "\n<#{wrapper_tag} #{options[:wrapper_class].blank? ? '' : ('class="'+options.delete(:wrapper_class)+'"')}>"
+      output << button_tag(id, content, 'submit', options)
+      output << "</#{wrapper_tag}>\n</form>"
       
-      return output
+      return output.html_safe
     end
     
     # Creates a button tag with the content passed to the content parameter inside.
@@ -66,7 +66,7 @@ module ActionButton
     # bassed on the parameters provided.
     #
     def button_tag(name, content, type, html_options = {})
-      content_tag(:button, content, html_options.merge(:type => type, :name => name, :id => name))
+      content_tag(:button, content, html_options.merge(:type => type, :name => name, :id => name)).html_safe
     end
     
     # Creates javascript to create a remote form event observer with the lowpro library for all
