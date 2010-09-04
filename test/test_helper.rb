@@ -21,6 +21,7 @@ class ActiveSupport::TestCase
   include ActionView::Helpers::FormTagHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::PrototypeHelper
   
   def assert_tag_in(*opts)
     target = HTML::Document.new(opts.shift, false, false)

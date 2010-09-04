@@ -55,7 +55,7 @@ class ActionButtonTest < ActiveSupport::TestCase
   
   context 'an action button with url options' do
     setup do
-      @controller = stub(:url_for => '/blog/show/5')
+      self.stubs(:url_for).returns('/blog/show/5')
       @button = action_button 'action', 'Do this', :controller => 'blog', :action => 'show', :id => 5
     end
     
